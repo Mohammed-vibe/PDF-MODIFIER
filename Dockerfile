@@ -32,6 +32,6 @@ RUN if [ -d /website/pdfcraft/libreoffice-wasm ]; then \
     done; \
     fi
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
