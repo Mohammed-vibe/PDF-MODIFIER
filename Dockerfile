@@ -16,7 +16,7 @@ WORKDIR /app
 # Install dependencies first (better layer caching)
 # Use BuildKit cache mount to persist npm cache across builds
 COPY package.json package-lock.json ./
-RUN --mount=type=cache,target=/root/.npm \
+RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
     npm ci --ignore-scripts
 
 # Copy source code
@@ -24,7 +24,7 @@ COPY . .
 
 # Build the static export
 # Use BuildKit cache mount for Next.js cache to speed up rebuilds
-RUN --mount=type=cache,target=/root/.npm \
+RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
     --mount=type=cache,target=/app/.next/cache \
     npm run build
 
