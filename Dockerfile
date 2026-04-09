@@ -1,7 +1,7 @@
 # =============================================================================
 # PDFCraft Production Dockerfile
 # Multi-stage build for optimized image size
-# Optimized with BuildKit cache mounts for faster builds
+# Compatible with Railway (fixed cache mounts)
 # =============================================================================
 
 # syntax=docker/dockerfile:1
@@ -13,19 +13,18 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies first (better layer caching)
-# Use BuildKit cache mount to persist npm cache across builds
+# Install dependencies first
 COPY package.json package-lock.json ./
-RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
+
+RUN --mount=type=cache,id=cache-npm,target=/root/.npm \
     npm ci --ignore-scripts
 
 # Copy source code
 COPY . .
 
 # Build the static export
-# Use BuildKit cache mount for Next.js cache to speed up rebuilds
-RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
-    --mount=type=cache,id=next-cache,target=/app/.next/cache \
+RUN --mount=type=cache,id=cache-npm,target=/root/.npm \
+    --mount=type=cache,id=cache-next,target=/app/.next/cache \
     npm run build
 
 # -----------------------------------------------------------------------------
@@ -33,23 +32,19 @@ RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
 # -----------------------------------------------------------------------------
 FROM nginx:1.25-alpine AS production
 
-# Add labels for GitHub Container Registry
+# Metadata
 LABEL org.opencontainers.image.source="https://github.com/PDFCraftTool/pdfcraft"
-LABEL org.opencontainers.image.description="PDFCraft - Professional PDF Tools, Free, Private & Browser-Based"
+LABEL org.opencontainers.image.description="PDFCraft - Professional PDF Tools"
 LABEL org.opencontainers.image.licenses="AGPL-3.0"
-LABEL org.opencontainers.image.title="PDFCraft"
-LABEL org.opencontainers.image.vendor="PDFCraftTool"
 
-# Copy custom nginx configuration
+# Copy nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY security-headers.conf /etc/nginx/security-headers.conf
 
-# Copy the static export from builder stage
+# Copy build output
 COPY --from=builder /app/out /website/pdfcraft
 
-# Decompress LibreOffice WASM .gz files so both original and .gz exist.
-# gzip_static requires the original file to exist; without it, Nginx returns 404.
-# The .gz files are kept alongside for gzip_static to serve to gzip-capable clients.
+# Fix WASM gzip files
 RUN if [ -d /website/pdfcraft/libreoffice-wasm ]; then \
     cd /website/pdfcraft/libreoffice-wasm && \
     for f in *.gz; do \
@@ -57,8 +52,8 @@ RUN if [ -d /website/pdfcraft/libreoffice-wasm ]; then \
     done; \
     fi
 
-# Expose port 80
+# Expose port
 EXPOSE 80
 
-# Start Nginx
+# Start server
 CMD ["nginx", "-g", "daemon off;"]
