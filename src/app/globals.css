@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (html.dark) for next-themes + Tailwind dark: variants */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* PDFCraft Design System - CSS Variables for Theming */
 :root {
   /* Primary Colors - Deep Blue/Indigo for trust and modern tech feel */

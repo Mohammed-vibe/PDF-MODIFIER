@@ -8,6 +8,7 @@ import { Search, Menu, X, Command, Github } from 'lucide-react';
 import { type Locale } from '@/lib/i18n/config';
 import { Button } from '@/components/ui/Button';
 import { RecentFilesDropdown } from '@/components/common/RecentFilesDropdown';
+import { ThemeToggle } from '@/components/common/ThemeToggle';
 import { searchTools, SearchResult } from '@/lib/utils/search';
 import { getToolContent } from '@/config/tool-content';
 import { getAllTools } from '@/config/tools';
@@ -315,6 +316,8 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
               }}
             />
 
+            <ThemeToggle className="h-9 w-9 p-0 text-[hsl(var(--color-muted-foreground))] hover:text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))/0.5]" />
+
             {/* GitHub Repository Link */}
             <a
               href="https://github.com/PDFCraftTool/pdfcraft"
@@ -368,6 +371,12 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
                   </Link>
                 </li>
               ))}
+              <li className="flex items-center justify-between px-4 py-2">
+                <span className="text-base font-medium text-[hsl(var(--color-foreground))]">
+                  {t('theme.label')}
+                </span>
+                <ThemeToggle className="h-10 w-10 shrink-0 p-0 text-[hsl(var(--color-muted-foreground))] hover:text-[hsl(var(--color-foreground))]" />
+              </li>
               {/* GitHub Link in Mobile Menu */}
               <li>
                 <a

@@ -46,6 +46,11 @@
       "privacy": "Privacy",
       "contact": "Contact"
     },
+    "theme": {
+      "label": "Theme",
+      "switchToDark": "Switch to dark mode",
+      "switchToLight": "Switch to light mode"
+    },
     "buttons": {
       "upload": "Upload Files",
       "download": "Download",
