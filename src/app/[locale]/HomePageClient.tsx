@@ -82,8 +82,8 @@ export default function HomePageClient({ locale }: HomePageClientProps) {
         <section className="relative overflow-hidden">
           {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--color-primary))]/5 via-transparent to-[hsl(var(--color-accent))]/5" />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[hsl(var(--color-primary))]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[hsl(var(--color-accent))]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+          <div className="absolute top-0 end-0 w-[500px] h-[500px] bg-[hsl(var(--color-primary))]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+          <div className="absolute bottom-0 start-0 w-[400px] h-[400px] bg-[hsl(var(--color-accent))]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
 
           <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-12 lg:py-16">
             <div className="max-w-3xl">
@@ -118,7 +118,7 @@ export default function HomePageClient({ locale }: HomePageClientProps) {
                   className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[hsl(var(--color-primary))] to-[hsl(var(--color-accent))] rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-[hsl(var(--color-primary))]/25"
                 >
                   {t('hero.cta')}
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                 </Link>
                 <Link
                   href={`/${locale}/tools?category=organize-manage`}
@@ -165,7 +165,7 @@ export default function HomePageClient({ locale }: HomePageClientProps) {
                 className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-[hsl(var(--color-primary))] hover:opacity-80 transition-opacity"
               >
                 View all
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 rtl:scale-x-[-1]" />
               </Link>
             </div>
 
@@ -185,7 +185,7 @@ export default function HomePageClient({ locale }: HomePageClientProps) {
                     className="group relative flex items-center gap-4 p-4 rounded-xl bg-[hsl(var(--color-card))] border border-[hsl(var(--color-border))] hover:border-[hsl(var(--color-border-strong))] hover:bg-[hsl(var(--color-card-hover))] transition-all duration-200 overflow-hidden"
                   >
                     {/* Gradient accent */}
-                    <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${gradient} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                    <div className={`absolute start-0 top-0 bottom-0 w-1 bg-gradient-to-b ${gradient} opacity-0 group-hover:opacity-100 transition-opacity`} />
 
                     {/* Icon */}
                     <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg`}>
@@ -198,7 +198,7 @@ export default function HomePageClient({ locale }: HomePageClientProps) {
                         <h3 className="text-sm font-semibold text-[hsl(var(--color-foreground))] group-hover:text-[hsl(var(--color-primary))] transition-colors">
                           {t(`categories.${key}`)}
                         </h3>
-                        <ChevronRight className="w-4 h-4 text-[hsl(var(--color-muted-foreground))] opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <ChevronRight className="w-4 h-4 rtl:scale-x-[-1] text-[hsl(var(--color-muted-foreground))] opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
                       <p className="text-xs text-[hsl(var(--color-muted-foreground))] mt-0.5 line-clamp-1">
                         {t(`categoriesDescription.${key}`)}

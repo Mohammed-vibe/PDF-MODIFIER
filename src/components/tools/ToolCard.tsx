@@ -109,12 +109,12 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
     >
       <div className="relative h-full p-4 rounded-xl bg-[hsl(var(--color-card))] border border-[hsl(var(--color-border))] hover:border-[hsl(var(--color-border-strong))] hover:bg-[hsl(var(--color-card-hover))] transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 overflow-hidden">
         {/* Favorite button */}
-        <div className="absolute top-3 right-3 z-10">
+        <div className="absolute top-3 end-3 z-10">
           <FavoriteButton toolId={tool.id} size="sm" />
         </div>
 
         {/* Gradient glow on hover */}
-        <div className={`absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br ${categoryColorClass} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`} />
+        <div className={`absolute -top-10 -end-10 w-20 h-20 bg-gradient-to-br ${categoryColorClass} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`} />
 
         <div className="flex flex-col h-full">
           {/* Icon & Title row */}
@@ -122,7 +122,7 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
             <div className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${categoryColorClass} flex items-center justify-center`}>
               <IconComponent className="w-5 h-5" />
             </div>
-            <div className="flex-1 min-w-0 pr-8">
+            <div className="flex-1 min-w-0 pe-8">
               <h3 className="text-sm font-semibold text-[hsl(var(--color-foreground))] leading-tight group-hover:text-[hsl(var(--color-primary))] transition-colors">
                 {toolName}
               </h3>

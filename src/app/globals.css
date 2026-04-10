@@ -2,6 +2,8 @@
 
 /* Modern dark-first UI - Slate & Indigo palette */
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant rtl (&:where([dir="rtl"], [dir="rtl"] *));
+@custom-variant ltr (&:where([dir="ltr"], [dir="ltr"] *));
 
 :root {
   /* Primary - Indigo */
@@ -56,7 +58,7 @@
   --color-warning-subtle: 38 92% 15%;
 
   /* Typography */
-  --font-sans: var(--font-inter, 'Inter'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: var(--font-inter, 'Inter'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Arabic', 'Noto Sans Arabic', Roboto, sans-serif;
   --font-mono: var(--font-jetbrains-mono, 'JetBrains Mono'), 'Fira Code', Consolas, monospace;
 
   /* Compact spacing scale */
@@ -278,7 +280,7 @@ body {
 /* Sidebar styling */
 .sidebar {
   background: hsl(var(--color-background-elevated));
-  border-right: 1px solid hsl(var(--color-border));
+  border-inline-end: 1px solid hsl(var(--color-border));
 }
 
 .light .sidebar {
@@ -436,11 +438,7 @@ body {
   }
 }
 
-/* RTL Support */
-[dir="rtl"] {
-  text-align: right;
-}
-
+/* RTL: optional mirror for icons that should face the opposite inline direction */
 [dir="rtl"] .rtl-flip {
   transform: scaleX(-1);
 }

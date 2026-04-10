@@ -153,7 +153,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
   return (
     <>
       {/* Desktop Header - Compact top bar */}
-      <header className="fixed top-0 left-0 right-0 z-50 h-14 border-b border-[hsl(var(--color-border))] bg-[hsl(var(--color-background-elevated))]/95 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 h-14 border-b border-[hsl(var(--color-border))] bg-[hsl(var(--color-background-elevated))]/95 backdrop-blur-md">
         <div className="h-full flex items-center justify-between px-4 lg:px-6">
           {/* Logo */}
           <Link
@@ -260,7 +260,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
                                     <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[hsl(var(--color-muted))] text-[hsl(var(--color-primary))]">
                                       {getCategoryIcon(result.tool.category)}
                                     </div>
-                                    <div className="flex-1 text-left">
+                                    <div className="flex-1 text-start">
                                       <div className={`text-sm font-medium ${isSelected ? 'text-[hsl(var(--color-primary))]' : 'text-[hsl(var(--color-foreground))]'}`}>
                                         {toolName}
                                       </div>
@@ -268,7 +268,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
                                         {toolDescription}
                                       </div>
                                     </div>
-                                    <ChevronRight className={`w-4 h-4 transition-opacity ${isSelected ? 'opacity-100' : 'opacity-0'}`} />
+                                    <ChevronRight className={`w-4 h-4 rtl:scale-x-[-1] transition-opacity ${isSelected ? 'opacity-100' : 'opacity-0'}`} />
                                   </button>
                                 </li>
                               );
@@ -343,7 +343,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
             className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <nav className="absolute right-0 top-14 bottom-0 w-64 bg-[hsl(var(--color-background-elevated))] border-l border-[hsl(var(--color-border))] animate-slide-in">
+          <nav className="absolute end-0 top-14 bottom-0 w-64 bg-[hsl(var(--color-background-elevated))] border-s border-[hsl(var(--color-border))] animate-slide-in">
             <div className="p-4 space-y-1">
               {navItems.map((item) => (
                 <Link

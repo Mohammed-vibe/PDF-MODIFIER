@@ -214,7 +214,7 @@ export function WorkflowPreview({ nodes, edges, inputFiles, isVisible, onToggle 
         return (
             <button
                 onClick={onToggle}
-                className="fixed bottom-4 right-4 z-40 flex items-center gap-2 px-4 py-2 bg-[hsl(var(--color-primary))] text-white rounded-lg shadow-lg hover:bg-[hsl(var(--color-primary)/0.9)] transition-colors"
+                className="fixed bottom-4 end-4 z-40 flex items-center gap-2 px-4 py-2 bg-[hsl(var(--color-primary))] text-white rounded-lg shadow-lg hover:bg-[hsl(var(--color-primary)/0.9)] transition-colors"
             >
                 <Eye className="w-4 h-4" />
                 {tWorkflow('showPreview') || 'Show Preview'}
@@ -230,7 +230,7 @@ export function WorkflowPreview({ nodes, edges, inputFiles, isVisible, onToggle 
         transition-all duration-300
         ${isExpanded
                     ? 'inset-4'
-                    : 'bottom-4 right-4 w-80 h-96'
+                    : 'bottom-4 end-4 w-80 h-96'
                 }
       `}
         >
@@ -296,7 +296,7 @@ export function WorkflowPreview({ nodes, edges, inputFiles, isVisible, onToggle 
                 ) : (
                     <div className="flex h-full">
                         {/* Thumbnails sidebar */}
-                        <div className="w-20 border-r border-[hsl(var(--color-border))] overflow-y-auto p-2 space-y-2">
+                        <div className="w-20 border-e border-[hsl(var(--color-border))] overflow-y-auto p-2 space-y-2">
                             {previews.map((preview, index) => (
                                 <button
                                     key={index}

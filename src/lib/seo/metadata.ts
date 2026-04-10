@@ -7,7 +7,7 @@
 
 import type { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
-import { type Locale, localeConfig, locales } from '@/lib/i18n/config';
+import { type Locale, localeConfig, locales, defaultLocale } from '@/lib/i18n/config';
 import type { Tool, ToolContent } from '@/types/tool';
 
 /**
@@ -56,8 +56,8 @@ export function getAlternateUrls(path: string = ''): Record<string, string> {
     alternates[locale] = `${siteConfig.url}/${locale}${cleanPath}`;
   }
 
-  // Add x-default pointing to English
-  alternates['x-default'] = `${siteConfig.url}/en${cleanPath}`;
+  // Add x-default pointing to the site default locale
+  alternates['x-default'] = `${siteConfig.url}/${defaultLocale}${cleanPath}`;
 
   return alternates;
 }

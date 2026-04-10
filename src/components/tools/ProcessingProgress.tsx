@@ -202,14 +202,14 @@ export const ProcessingProgress: React.FC<ProcessingProgressProps> = ({
       {/* Progress bar */}
       <div className="relative w-full h-2 bg-[hsl(var(--color-muted))] rounded-full overflow-hidden">
         <div
-          className={`absolute left-0 top-0 h-full transition-all duration-300 ease-out rounded-full ${progressBarColor}`}
+          className={`absolute start-0 top-0 h-full transition-all duration-300 ease-out rounded-full ${progressBarColor}`}
           style={{ width: `${clampedProgress}%` }}
         />
         
         {/* Animated shimmer for active states */}
         {(status === 'uploading' || status === 'processing') && clampedProgress < 100 && (
           <div
-            className="absolute left-0 top-0 h-full bg-gradient-to-r from-transparent via-[hsl(var(--color-primary-foreground)/0.3)] to-transparent motion-safe:animate-shimmer"
+            className="absolute start-0 top-0 h-full bg-gradient-to-r from-transparent via-[hsl(var(--color-primary-foreground)/0.3)] to-transparent motion-safe:animate-shimmer"
             style={{ width: `${clampedProgress}%` }}
           />
         )}
@@ -224,7 +224,7 @@ export const ProcessingProgress: React.FC<ProcessingProgressProps> = ({
 
         {/* Estimated time */}
         {showEstimatedTime && formattedTime && (status === 'uploading' || status === 'processing') && (
-          <span className="text-xs text-[hsl(var(--color-muted-foreground))] ml-4 whitespace-nowrap">
+          <span className="text-xs text-[hsl(var(--color-muted-foreground))] ms-4 whitespace-nowrap">
             {formattedTime}
           </span>
         )}

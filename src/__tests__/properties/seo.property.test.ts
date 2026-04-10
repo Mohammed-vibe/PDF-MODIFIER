@@ -374,7 +374,7 @@ describe('SEO Property Tests', () => {
       
       // x-default should be present
       expect(alternates['x-default']).toBeTruthy();
-      expect(alternates['x-default']).toContain('en');
+      expect(alternates['x-default']).toContain('ar');
     });
   });
 });

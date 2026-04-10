@@ -182,7 +182,7 @@ export function ToolSidebar({ onDragStart, isCollapsed = false, onToggleCollapse
     // Collapsed view
     if (isCollapsed) {
         return (
-            <div className="w-12 h-full bg-[hsl(var(--color-background))] border-r border-[hsl(var(--color-border))] flex flex-col items-center py-2">
+            <div className="w-12 h-full bg-[hsl(var(--color-background))] border-e border-[hsl(var(--color-border))] flex flex-col items-center py-2">
                 <button
                     onClick={onToggleCollapse}
                     className="p-2 rounded-lg hover:bg-[hsl(var(--color-muted))] transition-colors mb-2"
@@ -210,7 +210,7 @@ export function ToolSidebar({ onDragStart, isCollapsed = false, onToggleCollapse
     }
 
     return (
-        <div className="w-72 h-full bg-[hsl(var(--color-background))] border-r border-[hsl(var(--color-border))] flex flex-col">
+        <div className="w-72 h-full bg-[hsl(var(--color-background))] border-e border-[hsl(var(--color-border))] flex flex-col">
             {/* Header */}
             <div className="p-4 border-b border-[hsl(var(--color-border))] flex items-center justify-between">
                 <div>
@@ -233,13 +233,13 @@ export function ToolSidebar({ onDragStart, isCollapsed = false, onToggleCollapse
             {/* Search */}
             <div className="p-3 border-b border-[hsl(var(--color-border))]">
                 <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--color-muted-foreground))]" />
+                    <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--color-muted-foreground))]" />
                     <input
                         type="text"
                         placeholder={tWorkflow('searchTools') || 'Search tools...'}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-[hsl(var(--color-border))] bg-[hsl(var(--color-background))] text-[hsl(var(--color-foreground))] placeholder:text-[hsl(var(--color-muted-foreground))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--color-primary))]"
+                        className="w-full ps-9 pe-3 py-2 text-sm rounded-lg border border-[hsl(var(--color-border))] bg-[hsl(var(--color-background))] text-[hsl(var(--color-foreground))] placeholder:text-[hsl(var(--color-muted-foreground))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--color-primary))]"
                     />
                 </div>
             </div>
@@ -255,7 +255,7 @@ export function ToolSidebar({ onDragStart, isCollapsed = false, onToggleCollapse
                             {/* Category Header */}
                             <button
                                 onClick={() => toggleCategory(category.id)}
-                                className="w-full flex items-center gap-2 px-4 py-3 text-left hover:bg-[hsl(var(--color-muted)/0.5)] transition-colors"
+                                className="w-full flex items-center gap-2 px-4 py-3 text-start hover:bg-[hsl(var(--color-muted)/0.5)] transition-colors"
                             >
                                 {isExpanded ? (
                                     <ChevronDown className="w-4 h-4 text-[hsl(var(--color-muted-foreground))]" />
@@ -266,7 +266,7 @@ export function ToolSidebar({ onDragStart, isCollapsed = false, onToggleCollapse
                                 <span className="text-sm font-medium text-[hsl(var(--color-foreground))]">
                                     {category.name}
                                 </span>
-                                <span className="ml-auto text-xs text-[hsl(var(--color-muted-foreground))]">
+                                <span className="ms-auto text-xs text-[hsl(var(--color-muted-foreground))]">
                                     {category.tools.length}
                                 </span>
                             </button>

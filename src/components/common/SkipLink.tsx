@@ -48,7 +48,7 @@ export const SkipLink: React.FC<SkipLinkProps> = ({
       onKeyDown={handleKeyDown}
       className="
         sr-only focus:not-sr-only
-        fixed top-4 left-4 z-[10001]
+        fixed top-4 start-4 z-[10001]
         px-4 py-2
         bg-[hsl(var(--color-primary))] text-[hsl(var(--color-primary-foreground))]
         font-medium rounded-[var(--radius-md)]

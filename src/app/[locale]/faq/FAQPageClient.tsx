@@ -113,13 +113,13 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
 
               {/* Search Bar */}
               <div className="relative max-w-xl mx-auto">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[hsl(var(--color-muted-foreground))]" />
+                <Search className="absolute start-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[hsl(var(--color-muted-foreground))]" />
                 <input
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={t('searchPlaceholder')}
-                  className="w-full pl-12 pr-4 py-3 text-base rounded-lg border border-[hsl(var(--color-border))] bg-[hsl(var(--color-background))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--color-ring))]"
+                  className="w-full ps-12 pe-4 py-3 text-base rounded-lg border border-[hsl(var(--color-border))] bg-[hsl(var(--color-background))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--color-ring))]"
                   aria-label="Search FAQs"
                 />
               </div>
@@ -161,7 +161,7 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
                   {filteredFaqs.map((faq, index) => (
                     <Card key={index} className="overflow-hidden">
                       <button
-                        className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 hover:bg-[hsl(var(--color-muted)/0.5)] transition-colors"
+                        className="w-full px-6 py-4 text-start flex items-center justify-between gap-4 hover:bg-[hsl(var(--color-muted)/0.5)] transition-colors"
                         onClick={() => toggleItem(index)}
                         aria-expanded={expandedItems.has(index)}
                       >
@@ -213,7 +213,7 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
               <Link href={`/${locale}/contact`}>
                 <Button variant="primary">
                   {t('cta.button')}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
                 </Button>
               </Link>
             </div>

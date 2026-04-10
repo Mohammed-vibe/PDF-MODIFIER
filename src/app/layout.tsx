@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
+import { defaultLocale } from '@/lib/i18n/config';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { HtmlDocumentI18nSync } from '@/components/providers/HtmlDocumentI18nSync';
 
 export const metadata: Metadata = {
   title: 'PDFCraft - Professional PDF Tools',
@@ -20,12 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={defaultLocale} suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light dark" />
         <style dangerouslySetInnerHTML={{ __html: 'html{scrollbar-gutter:stable}' }} />
       </head>
       <body className="min-h-screen bg-background text-foreground antialiased">
+        <HtmlDocumentI18nSync />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>

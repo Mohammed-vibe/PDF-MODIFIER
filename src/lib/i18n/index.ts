@@ -6,6 +6,7 @@
 export {
   locales,
   defaultLocale,
+  defaultLocale as DEFAULT_LOCALE,
   localeConfig,
   isRTL,
   isValidLocale,
@@ -37,7 +38,6 @@ export {
 
 // Legacy exports for backward compatibility
 export const SUPPORTED_LOCALES = ['en', 'ja', 'ko', 'es', 'fr', 'de', 'zh', 'zh-TW', 'pt', 'ar', 'it'] as const;
-export const DEFAULT_LOCALE = 'en';
 export const LOCALE_CONFIG = {
   en: { name: 'English', nativeName: 'English', direction: 'ltr' as const },
   ja: { name: 'Japanese', nativeName: '日本語', direction: 'ltr' as const },

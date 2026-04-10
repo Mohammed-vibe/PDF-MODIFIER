@@ -173,7 +173,7 @@ export const Navigation: React.FC<NavigationProps> = ({ locale, currentPath }) =
               {openDropdown === item.href && (
                 <div
                   id={`dropdown-${item.href}`}
-                  className="absolute top-full left-0 mt-1 w-56 py-2 bg-[hsl(var(--color-background))] border border-[hsl(var(--color-border))] rounded-[var(--radius-lg)] shadow-lg z-50"
+                  className="absolute top-full start-0 mt-1 w-56 py-2 bg-[hsl(var(--color-background))] border border-[hsl(var(--color-border))] rounded-[var(--radius-lg)] shadow-lg z-50"
                   role="menu"
                   aria-orientation="vertical"
                 >

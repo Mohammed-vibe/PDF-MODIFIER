@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useCallback, useState } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { X, ChevronRight, ChevronDown } from 'lucide-react';
-import { type Locale } from '@/lib/i18n/config';
+import { type Locale, isRTL } from '@/lib/i18n/config';
 import { type ToolCategory } from '@/types/tool';
 import { Button } from '@/components/ui/Button';
 
@@ -133,8 +133,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, locale 
     const touchEnd = e.changedTouches[0].clientX;
     const diff = touchStart - touchEnd;
     
-    // Swipe left to close (for LTR) - threshold of 100px
-    if (diff > 100) {
+    const rtl = isRTL(locale);
+    if (rtl ? diff < -100 : diff > 100) {
       onClose();
     }
     
@@ -165,10 +165,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, locale 
       <div
         ref={menuRef}
         className={`
-          fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[hsl(var(--color-background))] 
+          fixed top-0 end-0 h-full w-80 max-w-[85vw] bg-[hsl(var(--color-background))] 
           shadow-xl z-50 md:hidden
           transform transition-transform duration-300 ease-in-out
-          ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+          ${isOpen ? 'translate-x-0' : 'ltr:translate-x-full rtl:-translate-x-full'}
         `}
         role="dialog"
         aria-modal="true"
@@ -201,7 +201,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, locale 
                   <div>
                     <button
                       onClick={() => handleCategoryToggle('tools')}
-                      className="flex items-center justify-between w-full px-4 py-3 text-left text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))] rounded-[var(--radius-md)] transition-colors"
+                      className="flex items-center justify-between w-full px-4 py-3 text-start text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))] rounded-[var(--radius-md)] transition-colors"
                       aria-expanded={expandedCategory === 'tools'}
                     >
                       <span className="font-medium">{item.label}</span>
@@ -214,7 +214,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, locale 
                     
                     {/* Submenu */}
                     {expandedCategory === 'tools' && (
-                      <ul className="ml-4 mt-1 border-l-2 border-[hsl(var(--color-border))]">
+                      <ul className="ms-4 mt-1 border-s-2 border-[hsl(var(--color-border))]">
                         <li>
                           <Link
                             href={item.href}
