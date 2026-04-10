@@ -3,10 +3,6 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import {
-  ArrowRight,
-  Zap,
-  Shield,
-  Globe,
   Edit3,
   FilePlus,
   FileOutput,
@@ -60,7 +56,6 @@ const categoryGradients: Record<ToolCategory, string> = {
 
 export default function HomePageClient({ locale }: HomePageClientProps) {
   const t = useTranslations('home');
-  const tCommon = useTranslations('common');
   const allTools = getAllTools();
 
   // Get featured tools (most popular ones)
@@ -78,76 +73,6 @@ export default function HomePageClient({ locale }: HomePageClientProps) {
       <Header locale={locale} />
 
       <main className="flex-1 pt-14">
-        {/* Hero Section - Modern gradient background */}
-        <section className="relative overflow-hidden">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--color-primary))]/5 via-transparent to-[hsl(var(--color-accent))]/5" />
-          <div className="absolute top-0 end-0 w-[500px] h-[500px] bg-[hsl(var(--color-primary))]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          <div className="absolute bottom-0 start-0 w-[400px] h-[400px] bg-[hsl(var(--color-accent))]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
-
-          <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-12 lg:py-16">
-            <div className="max-w-3xl">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[hsl(var(--color-primary))]/10 border border-[hsl(var(--color-primary))]/20 mb-6">
-                <Sparkles className="w-3.5 h-3.5 text-[hsl(var(--color-primary))]" />
-                <span className="text-xs font-medium text-[hsl(var(--color-primary))]">
-                  {allTools.length}+ Free PDF Tools
-                </span>
-              </div>
-
-              {/* Title */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[hsl(var(--color-foreground))] mb-4">
-                {t('hero.title').split(' ').map((word, i, arr) => {
-                  // Highlight the last 2 words
-                  if (i >= arr.length - 2) {
-                    return <span key={i} className="text-gradient"> {word}</span>;
-                  }
-                  return i === 0 ? word : ` ${word}`;
-                })}
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-base sm:text-lg text-[hsl(var(--color-muted-foreground))] leading-relaxed mb-8 max-w-2xl">
-                {t('hero.subtitle')}
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-4">
-                <Link
-                  href={`/${locale}/tools`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[hsl(var(--color-primary))] to-[hsl(var(--color-accent))] rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-[hsl(var(--color-primary))]/25"
-                >
-                  {t('hero.cta')}
-                  <ArrowRight className="w-4 h-4 rtl:rotate-180" />
-                </Link>
-                <Link
-                  href={`/${locale}/tools?category=organize-manage`}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[hsl(var(--color-muted-foreground))] hover:text-[hsl(var(--color-foreground))] transition-colors"
-                >
-                  <Zap className="w-4 h-4" />
-                  Popular Tools
-                </Link>
-              </div>
-
-              {/* Trust badges */}
-              <div className="flex flex-wrap items-center gap-6 mt-8 pt-8 border-t border-[hsl(var(--color-border-subtle))]">
-                <div className="flex items-center gap-2 text-xs text-[hsl(var(--color-muted-foreground))]">
-                  <Shield className="w-4 h-4 text-[hsl(var(--color-success))]" />
-                  <span>100% Private</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-[hsl(var(--color-muted-foreground))]">
-                  <Globe className="w-4 h-4 text-[hsl(var(--color-primary))]" />
-                  <span>Browser-based</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-[hsl(var(--color-muted-foreground))]">
-                  <Zap className="w-4 h-4 text-[hsl(var(--color-warning))]" />
-                  <span>Lightning Fast</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Categories Grid - Modern compact cards */}
         <section className="py-10 border-t border-[hsl(var(--color-border))]">
           <div className="max-w-7xl mx-auto px-4 lg:px-6">

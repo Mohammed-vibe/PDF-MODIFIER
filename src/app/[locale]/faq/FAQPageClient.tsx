@@ -23,20 +23,16 @@ interface FAQItem {
 
 export default function FAQPageClient({ locale }: FAQPageClientProps) {
   const t = useTranslations('faqPage');
-  const tCommon = useTranslations('common');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   // Helper to get FAQs for a category
   const getCategoryFaqs = (categoryKey: string, categoryLabel: string): FAQItem[] => {
-    const items = ['whatIs', 'isFree', 'account', 'uploaded', 'safe', 'storage', 'operations', 'merge', 'images', 'edit', 'browsers', 'sizeLimit', 'slow', 'offline', 'supported', 'change'];
     const categoryMapping: Record<string, string[]> = {
-      'general': ['whatIs', 'isFree', 'account'],
-      'privacy': ['uploaded', 'safe', 'storage'],
-      'features': ['operations', 'merge', 'images', 'edit'],
-      'technical': ['browsers', 'sizeLimit', 'slow', 'offline'],
-      'languages': ['supported', 'change']
+      general: ['whatIs', 'account'],
+      privacy: ['uploaded', 'storage'],
+      technical: ['browsers', 'slow'],
     };
 
     const keys = categoryMapping[categoryKey] || [];
@@ -53,9 +49,7 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
   const faqs: FAQItem[] = [
     ...getCategoryFaqs('general', t('categories.general')),
     ...getCategoryFaqs('privacy', t('categories.privacy')),
-    ...getCategoryFaqs('features', t('categories.features')),
     ...getCategoryFaqs('technical', t('categories.technical')),
-    ...getCategoryFaqs('languages', t('categories.languages')),
   ];
 
   // Get unique categories for filter buttons
@@ -63,9 +57,7 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
     { key: 'all', label: t('categories.all') },
     { key: 'general', label: t('categories.general') },
     { key: 'privacy', label: t('categories.privacy') },
-    { key: 'features', label: t('categories.features') },
     { key: 'technical', label: t('categories.technical') },
-    { key: 'languages', label: t('categories.languages') },
   ];
 
   // Filter FAQs
@@ -108,12 +100,12 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
                 {t('title')}
               </h1>
               <p className="text-[hsl(var(--color-muted-foreground))] mb-8">
-                {t('subtitle', { brand: tCommon('brand') })}
+                {t('subtitle')}
               </p>
 
               {/* Search Bar */}
               <div className="relative max-w-xl mx-auto">
-                <Search className="absolute start-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[hsl(var(--color-muted-foreground))]" />
+                <Search className="absolute inset-s-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[hsl(var(--color-muted-foreground))]" />
                 <input
                   type="search"
                   value={searchQuery}
@@ -145,16 +137,6 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
                 ))}
               </div>
 
-              {/* Expand/Collapse Controls */}
-              <div className="flex justify-end gap-2 mb-4">
-                <Button variant="ghost" size="sm" onClick={expandAll}>
-                  {t('expandAll')}
-                </Button>
-                <Button variant="ghost" size="sm" onClick={collapseAll}>
-                  {t('collapseAll')}
-                </Button>
-              </div>
-
               {/* FAQ List */}
               {filteredFaqs.length > 0 ? (
                 <div className="space-y-4">
@@ -174,9 +156,9 @@ export default function FAQPageClient({ locale }: FAQPageClientProps) {
                           </span>
                         </div>
                         {expandedItems.has(index) ? (
-                          <ChevronUp className="h-5 w-5 text-[hsl(var(--color-muted-foreground))] flex-shrink-0" />
+                          <ChevronUp className="h-5 w-5 text-[hsl(var(--color-muted-foreground))] shrink-0" />
                         ) : (
-                          <ChevronDown className="h-5 w-5 text-[hsl(var(--color-muted-foreground))] flex-shrink-0" />
+                          <ChevronDown className="h-5 w-5 text-[hsl(var(--color-muted-foreground))] shrink-0" />
                         )}
                       </button>
                       {expandedItems.has(index) && (
