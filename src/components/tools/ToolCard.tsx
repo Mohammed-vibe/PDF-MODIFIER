@@ -38,6 +38,40 @@ const categoryBadgeColors: Record<ToolCategory, string> = {
   'secure-pdf': 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20',
 };
 
+function getDisplayDescription(description: string, locale: string) {
+  if (!locale.startsWith('ar')) {
+    return description;
+  }
+
+  const sentences = description
+    .split(/[.!؟]\s*/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (sentences.length === 0) {
+    return description;
+  }
+
+  const actionPattern = /(أضف|حوّل|حول|ادمج|قسّم|قسم|استخرج|اضغط|وقّع|وقع|احذف|دوّر|دور|رتّب|رتب|افتح|اقرأ|غيّر|غير|أنشئ|انشئ|أزل|ازل|احم|فك|أصلح|اصلح|قص|قارِن|قارن)/;
+  const marketingPattern = /(مجاني|عبر الإنترنت|احترافية|سهلة الاستخدام|قوية|آمنة|شاملة)/;
+
+  const bestSentence = [...sentences].sort((a, b) => {
+    const score = (text: string) => {
+      let value = Math.min(text.length, 80) / 20;
+      if (actionPattern.test(text)) value += 4;
+      if (marketingPattern.test(text)) value -= 2;
+      return value;
+    };
+
+    return score(b) - score(a);
+  })[0];
+
+  return bestSentence
+    .replace(/\s+/g, ' ')
+    .replace(/\s+،/g, '،')
+    .trim();
+}
+
 const categoryTranslationKeys: Record<ToolCategory, string> = {
   'edit-annotate': 'editAnnotate',
   'convert-to-pdf': 'convertToPdf',
@@ -64,6 +98,7 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
     .slice(0, 2)
     .map(f => f.replace(/-/g, ' '))
     .join(' • ');
+  const displayDescription = getDisplayDescription(description, locale);
 
   const IconComponent = getToolIcon(tool.icon);
   const categoryColorClass = categoryColors[tool.category];
@@ -80,7 +115,7 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
       >
         <div className="flex items-center gap-3 p-3 rounded-lg bg-[hsl(var(--color-card))] border border-[hsl(var(--color-border))] hover:border-[hsl(var(--color-primary))/0.5] hover:bg-[hsl(var(--color-card-hover))] transition-all duration-200">
           {/* Icon */}
-          <div className={`flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br ${categoryColorClass} flex items-center justify-center`}>
+          <div className={`shrink-0 w-10 h-10 rounded-lg bg-linear-to-br ${categoryColorClass} flex items-center justify-center`}>
             <IconComponent className="w-5 h-5" />
           </div>
 
@@ -90,12 +125,12 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
               {toolName}
             </h3>
             <p className="text-[11px] text-[hsl(var(--color-muted-foreground))] truncate">
-              {description}
+              {displayDescription}
             </p>
           </div>
 
           {/* Arrow */}
-          <ArrowUpRight className="w-4 h-4 text-[hsl(var(--color-muted-foreground))] opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+          <ArrowUpRight className="w-4 h-4 text-[hsl(var(--color-muted-foreground))] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
         </div>
       </Link>
     );
@@ -109,17 +144,17 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
     >
       <div className="relative h-full p-4 rounded-xl bg-[hsl(var(--color-card))] border border-[hsl(var(--color-border))] hover:border-[hsl(var(--color-border-strong))] hover:bg-[hsl(var(--color-card-hover))] transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 overflow-hidden">
         {/* Favorite button */}
-        <div className="absolute top-3 end-3 z-10">
+        <div className="absolute top-3 inset-e-3 z-10">
           <FavoriteButton toolId={tool.id} size="sm" />
         </div>
 
         {/* Gradient glow on hover */}
-        <div className={`absolute -top-10 -end-10 w-20 h-20 bg-gradient-to-br ${categoryColorClass} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`} />
+        <div className={`absolute -top-10 -inset-e-10 w-20 h-20 bg-linear-to-br ${categoryColorClass} opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-500`} />
 
         <div className="flex flex-col h-full">
           {/* Icon & Title row */}
           <div className="flex items-start gap-3 mb-3">
-            <div className={`flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br ${categoryColorClass} flex items-center justify-center`}>
+            <div className={`shrink-0 w-11 h-11 rounded-xl bg-linear-to-br ${categoryColorClass} flex items-center justify-center`}>
               <IconComponent className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0 pe-8">
@@ -131,7 +166,7 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
 
           {/* Description */}
           <p className="text-xs text-[hsl(var(--color-muted-foreground))] line-clamp-2 leading-relaxed mb-3 flex-1">
-            {description}
+            {displayDescription}
           </p>
 
           {/* Footer row */}
@@ -144,7 +179,7 @@ export function ToolCard({ tool, locale, className = '', localizedContent, compa
 
             {/* Try now link */}
             <span className="text-xs font-medium text-[hsl(var(--color-primary))] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5">
-              Open
+              فتح
               <ArrowUpRight className="w-3 h-3" />
             </span>
           </div>

@@ -196,17 +196,17 @@
     }
   },
   "toolsPage": {
-    "title": "أدوات PDF احترافية",
-    "subtitle": "{count}+ أداة مجانية وآمنة وسهلة الاستخدام لجميع احتياجاتك في ملفات PDF.",
+    "title": "كل أدوات PDF",
+    "subtitle": "اختر الأداة اللي تحتاجها لملفك، وابدأ مباشرة بدون تعقيد.",
     "filters": "عوامل التصفية",
     "allTools": "جميع الأدوات",
     "clearAll": "مسح الكل",
-    "clearFilters": "إزالة عوامل التصفية",
-    "showingAll": "عرض جميع الأدوات ({count})",
+    "clearFilters": "مسح التصفية",
+    "showingAll": "عرض كل الأدوات ({count})",
     "showingFiltered": "عرض {filtered} من أصل {total}",
     "forQuery": "لـ \"{query}\"",
     "inCategory": "ضمن {category}",
-    "noToolsFound": "لم يتم العثور على أدوات"
+    "noToolsFound": "ما لقينا أدوات مطابقة"
   },
   "faqPage": {
     "title": "الأسئلة الشائعة",
@@ -478,12 +478,12 @@
       "toolsCount": "{count} أداة"
     },
     "categoriesDescription": {
-      "editAnnotate": "تحرير وشرح وتعديل محتوى PDF",
-      "convertToPdf": "تحويل صيغ مختلفة إلى PDF",
-      "convertFromPdf": "تحويل ملفات PDF إلى صيغ أخرى",
-      "organizeManage": "تنظيم ودمج وتقسيم وإدارة صفحات PDF",
-      "optimizeRepair": "ضغط وتحسين وإصلاح ملفات PDF",
-      "securePdf": "تشفير وفك تشفير وتأمين ملفات PDF"
+      "editAnnotate": "تعديل PDF وإضافة ملاحظات أو عناصر عليه",
+      "convertToPdf": "تحويل الملفات المختلفة إلى PDF",
+      "convertFromPdf": "تحويل PDF إلى صيغ ثانية",
+      "organizeManage": "ترتيب الصفحات أو دمجها أو تقسيمها",
+      "optimizeRepair": "ضغط الملف أو تحسينه أو إصلاحه",
+      "securePdf": "حماية ملفات PDF أو فك حمايتها"
     },
     "stats": {
       "pdfTools": "أدوات PDF",

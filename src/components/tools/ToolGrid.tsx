@@ -2,7 +2,7 @@
 
 import React, { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import { Tool, ToolCategory, CATEGORY_INFO } from '@/types/tool';
+import { Tool, ToolCategory } from '@/types/tool';
 import { ToolCard } from './ToolCard';
 import { Grid3X3, Layers } from 'lucide-react';
 
@@ -112,7 +112,7 @@ export function ToolGrid({
         <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[hsl(var(--color-muted))] flex items-center justify-center">
           <Grid3X3 className="w-8 h-8 text-[hsl(var(--color-muted-foreground))]" />
         </div>
-        <p className="text-sm text-[hsl(var(--color-muted-foreground))]">No tools found</p>
+        <p className="text-sm text-[hsl(var(--color-muted-foreground))]">{t('toolsPage.noToolsFound')}</p>
       </div>
     );
   }
@@ -129,8 +129,8 @@ export function ToolGrid({
         {Object.entries(groupedTools).map(([cat, categoryTools]) => {
           if (categoryTools.length === 0) return null;
 
-          const categoryInfo = CATEGORY_INFO[cat as ToolCategory];
           const categoryName = t(`home.categories.${categoryTranslationKeys[cat as ToolCategory]}`);
+          const categoryDescription = t(`home.categoriesDescription.${categoryTranslationKeys[cat as ToolCategory]}`);
           const Icon = categoryIcons[cat as ToolCategory];
 
           return (
@@ -145,7 +145,7 @@ export function ToolGrid({
                     {categoryName}
                   </h2>
                   <p className="text-xs text-[hsl(var(--color-muted-foreground))]">
-                    {categoryTools.length} {categoryTools.length === 1 ? 'tool' : 'tools'} • {categoryInfo.description}
+                    {t('home.categoriesSection.toolsCount', { count: categoryTools.length })} • {categoryDescription}
                   </p>
                 </div>
               </div>

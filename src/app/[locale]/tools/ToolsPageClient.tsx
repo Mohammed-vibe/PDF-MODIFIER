@@ -123,6 +123,11 @@ export default function ToolsPageClient({ locale, localizedToolContent }: ToolsP
   }, []);
 
   const activeGradient = categoryColors[selectedCategory] || categoryColors.all;
+  const resultsText = selectedCategory === 'favorites'
+    ? `${filteredTools.length} ${t('tools.favorite.title')}`
+    : filteredTools.length === allTools.length
+      ? t('toolsPage.showingAll', { count: allTools.length })
+      : t('toolsPage.showingFiltered', { filtered: filteredTools.length, total: allTools.length });
 
   return (
     <div className="min-h-screen flex flex-col bg-[hsl(var(--color-background))]">
@@ -131,7 +136,7 @@ export default function ToolsPageClient({ locale, localizedToolContent }: ToolsP
       <main className="flex-1 pt-14">
         {/* Hero Section */}
         <section className="relative overflow-hidden border-b border-[hsl(var(--color-border))]">
-          <div className={`absolute inset-0 bg-gradient-to-br ${activeGradient} opacity-5`} />
+          <div className={`absolute inset-0 bg-linear-to-br ${activeGradient} opacity-5`} />
 
           <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-10">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
@@ -139,7 +144,7 @@ export default function ToolsPageClient({ locale, localizedToolContent }: ToolsP
               <div className="flex-1">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] text-xs font-medium mb-4">
                   <Sparkles className="w-3.5 h-3.5" />
-                  {allTools.length}+ Tools Available
+                  {allTools.length}+ {t('toolsPage.allTools')}
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[hsl(var(--color-foreground))] mb-2">
                   <span className="text-gradient">{t('toolsPage.title')}</span>
@@ -214,7 +219,7 @@ export default function ToolsPageClient({ locale, localizedToolContent }: ToolsP
                         ? 'bg-[hsl(var(--color-card))] text-[hsl(var(--color-foreground))] shadow-sm'
                         : 'text-[hsl(var(--color-muted-foreground))]'
                     }`}
-                    title="Grid view"
+                    title="عرض شبكي"
                   >
                     <Grid3X3 className="w-4 h-4" />
                   </button>
@@ -225,7 +230,7 @@ export default function ToolsPageClient({ locale, localizedToolContent }: ToolsP
                         ? 'bg-[hsl(var(--color-card))] text-[hsl(var(--color-foreground))] shadow-sm'
                         : 'text-[hsl(var(--color-muted-foreground))]'
                     }`}
-                    title="Compact view"
+                    title="عرض مختصر"
                   >
                     <List className="w-4 h-4" />
                   </button>
@@ -254,12 +259,8 @@ export default function ToolsPageClient({ locale, localizedToolContent }: ToolsP
             {/* Results Count */}
             <div className="flex items-center justify-between mb-4">
               <p className="text-sm text-[hsl(var(--color-muted-foreground))]">
-                {selectedCategory === 'favorites'
-                  ? `${filteredTools.length} favorites`
-                  : filteredTools.length === allTools.length
-                    ? `Showing all ${allTools.length} tools`
-                    : `Showing ${filteredTools.length} of ${allTools.length} tools`}
-                {searchQuery && ` for "${searchQuery}"`}
+                {resultsText}
+                {searchQuery && ` ${t('toolsPage.forQuery', { query: searchQuery })}`}
               </p>
             </div>
 
